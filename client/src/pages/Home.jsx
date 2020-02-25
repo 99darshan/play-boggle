@@ -56,50 +56,50 @@ export default function Home() {
     // TODO: if the clicked word is adjacent word, else display a toast message
     console.log("cell clikced: " + e.target.textContent);
     //console.table(validAdjacentCells);
-    setInputWord(inputWord + e.target.textContent);
+    //setInputWord(inputWord + e.target.textContent);
     let isCurrentRowColPresentInValidAdjCells = validAdjacentCells.some(cor => {
       return currentRow === cor[0] && currentCol === cor[1];
     });
     if (
-      validAdjacentCells.length > 0 &&
+      validAdjacentCells.length === 0 ||
       isCurrentRowColPresentInValidAdjCells
     ) {
       console.log("valid index");
+      setInputWord(inputWord + e.target.textContent);
+      let possibleAdjCellIndices = [
+        [-1, -1],
+        [0, -1],
+        [1, -1],
+        [-1, 0],
+        [1, 0],
+        [-1, 1],
+        [0, 1],
+        [1, 1]
+      ];
+      let validAdjCells = [];
+      // TODO: maybe if the current selected itself is not a valid adj cell, the possible adj cell should not be reset??
+      possibleAdjCellIndices.forEach(posIndex => {
+        if (
+          currentRow + posIndex[0] >= 0 &&
+          currentRow + posIndex[0] < 3 &&
+          currentCol + posIndex[1] >= 0 &&
+          currentCol + posIndex[1] < 3
+        )
+          validAdjCells.push([
+            currentRow + posIndex[0],
+            currentCol + posIndex[1]
+          ]);
+      });
+      setValidAdjacentcells([...validAdjCells]);
+      //console.table(validAdjacentCells);
     }
     if (
       validAdjacentCells.length > 0 &&
       !isCurrentRowColPresentInValidAdjCells
     ) {
       console.log("invalid adjacent cell");
+      alert("invalid adjacent cell clicked!!"); // TODO: replace with a toast message
     }
-    console.log("cur row: " + currentRow + " cur col: " + currentCol);
-
-    let possibleAdjCellIndices = [
-      [-1, -1],
-      [0, -1],
-      [1, -1],
-      [-1, 0],
-      [1, 0],
-      [-1, 1],
-      [0, 1],
-      [1, 1]
-    ];
-    let validAdjCells = [];
-    // TODO: maybe if the current selected itself is not a valid adj cell, the possible adj cell should not be reset??
-    possibleAdjCellIndices.forEach(posIndex => {
-      if (
-        currentRow + posIndex[0] >= 0 &&
-        currentRow + posIndex[0] < 3 &&
-        currentCol + posIndex[1] >= 0 &&
-        currentCol + posIndex[1] < 3
-      )
-        validAdjCells.push([
-          currentRow + posIndex[0],
-          currentCol + posIndex[1]
-        ]);
-    });
-    setValidAdjacentcells([...validAdjCells]);
-    //console.table(validAdjacentCells);
   }
 
   return (
@@ -139,7 +139,14 @@ export default function Home() {
         )}
 
         <p>Input Word: {inputWord}</p>
-        <button onClick={e => setInputWord("")}>Reset</button>
+        <button
+          onClick={e => {
+            setInputWord("");
+            setValidAdjacentcells([]);
+          }}
+        >
+          Reset
+        </button>
         <button onClick={onWordSubmitted}>Submit Word</button>
         <button
           onClick={() =>
