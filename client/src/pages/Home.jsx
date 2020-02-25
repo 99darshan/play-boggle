@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Timer from "../components/Timer";
 
 const board = [
   ["a", "b", "c"],
@@ -25,7 +26,6 @@ export default function Home() {
   const [correctWords, setCorrectWords] = useState([]);
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
-  const [timeRemaining, setTimeRemaining] = useState(180);
 
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
@@ -49,22 +49,10 @@ export default function Home() {
     setInputWord(inputWord + e.target.textContent);
   };
 
-  useEffect(() => {
-    console.log("use effect");
-    const timerIntervalId = setInterval(
-      () => setTimeRemaining(timeRemaining - 1),
-      1000
-    );
-    // clear interval on re-render to avoid memory leaks
-    return () => clearInterval(timerIntervalId);
-
-    // re-run effect when timeRemaining is updated
-  }, [timeRemaining]);
-
   return (
     <>
       <h2>Boggle</h2>
-      <h2>&#128368;{timeRemaining} seconds</h2>
+      <Timer totalTimeInSec={180} />
       {/* Board */}
       <div style={styles.boggleBoardContainer}>
         <div style={styles.boggleBoard}>
