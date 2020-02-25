@@ -15,10 +15,16 @@ const validWordsInBoggle = [
   "words"
 ];
 
+const INPUT_MODES = {
+  textField: "textFieldInputMode",
+  boardClick: "boardClickInputMode"
+};
+
 export default function Home() {
-  const [inputWord, setInputWord] = useState("initial");
+  const [inputWord, setInputWord] = useState("");
   const [correctWords, setCorrectWords] = useState([]);
   const [incorrectWords, setIncorrectWords] = useState([]);
+  const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
 
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
@@ -36,6 +42,12 @@ export default function Home() {
     setInputWord("");
   };
 
+  const onBoggleCellClick = e => {
+    // TODO: if the clicked word is adjacent word, else display a toast message
+    console.log("cell clikced: " + e.target.textContent);
+    setInputWord(inputWord + e.target.textContent);
+  };
+
   return (
     <>
       <h2>Boggle</h2>
@@ -46,7 +58,9 @@ export default function Home() {
             return (
               <div style={styles.bbRow}>
                 {row.map(item => (
-                  <div style={styles.bbCell}>{item}</div>
+                  <div style={styles.bbCell} onClick={onBoggleCellClick}>
+                    {item}
+                  </div>
                 ))}
               </div>
             );
@@ -55,15 +69,31 @@ export default function Home() {
       </div>
       {/* Input Field */}
       <div style={styles.bbInputField}>
-        <input
-          type="text"
-          name="inputWord"
-          onChange={e => setInputWord(e.target.value)}
-          value={inputWord}
-        />
+        {inputMode === INPUT_MODES.textField && (
+          <input
+            type="text"
+            name="inputWord"
+            onChange={e => setInputWord(e.target.value)}
+            value={inputWord}
+          />
+        )}
+
         <p>Input Word: {inputWord}</p>
         <button onClick={e => setInputWord("")}>Reset</button>
         <button onClick={onWordSubmitted}>Submit Word</button>
+        <button
+          onClick={() =>
+            setInputMode(
+              inputMode === INPUT_MODES.textField
+                ? INPUT_MODES.boardClick
+                : INPUT_MODES.textField
+            )
+          }
+        >
+          {inputMode === INPUT_MODES.textField
+            ? "Switch to Board Click Mode"
+            : "Switch to Text Field Mode"}
+        </button>
         <div>
           <p>Correct Words List: </p>
           {correctWords.map(word => (
