@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Timer from "../components/Timer";
 
 const board = [
-  ["a", "b", "c"],
-  ["m", "n", "p"],
+  ["a", "a", "a"],
+  ["m", "n", "m"],
   ["x", "y", "z"]
 ];
 
@@ -26,7 +26,7 @@ export default function Home() {
   const [correctWords, setCorrectWords] = useState([]);
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
-
+  const [validAdjacentCells, setValidAdjacentcells] = useState([]);
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
     // TODO: display toast messages on same correct and word input multiple times
@@ -43,11 +43,64 @@ export default function Home() {
     setInputWord("");
   };
 
-  const onBoggleCellClick = e => {
+  function onBoggleCellClick(e, currentRow, currentCol) {
+    console.log(
+      "r: " +
+        currentRow +
+        "& col: " +
+        currentCol +
+        "-" +
+        typeof currentRow +
+        typeof currentCol
+    );
     // TODO: if the clicked word is adjacent word, else display a toast message
     console.log("cell clikced: " + e.target.textContent);
+    //console.table(validAdjacentCells);
     setInputWord(inputWord + e.target.textContent);
-  };
+    let isCurrentRowColPresentInValidAdjCells = validAdjacentCells.some(cor => {
+      return currentRow === cor[0] && currentCol === cor[1];
+    });
+    if (
+      validAdjacentCells.length > 0 &&
+      isCurrentRowColPresentInValidAdjCells
+    ) {
+      console.log("valid index");
+    }
+    if (
+      validAdjacentCells.length > 0 &&
+      !isCurrentRowColPresentInValidAdjCells
+    ) {
+      console.log("invalid adjacent cell");
+    }
+    console.log("cur row: " + currentRow + " cur col: " + currentCol);
+
+    let possibleAdjCellIndices = [
+      [-1, -1],
+      [0, -1],
+      [1, -1],
+      [-1, 0],
+      [1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1]
+    ];
+    let validAdjCells = [];
+    // TODO: maybe if the current selected itself is not a valid adj cell, the possible adj cell should not be reset??
+    possibleAdjCellIndices.forEach(posIndex => {
+      if (
+        currentRow + posIndex[0] >= 0 &&
+        currentRow + posIndex[0] < 3 &&
+        currentCol + posIndex[1] >= 0 &&
+        currentCol + posIndex[1] < 3
+      )
+        validAdjCells.push([
+          currentRow + posIndex[0],
+          currentCol + posIndex[1]
+        ]);
+    });
+    setValidAdjacentcells([...validAdjCells]);
+    //console.table(validAdjacentCells);
+  }
 
   return (
     <>
@@ -56,11 +109,16 @@ export default function Home() {
       {/* Board */}
       <div style={styles.boggleBoardContainer}>
         <div style={styles.boggleBoard}>
-          {board.map(row => {
+          {board.map((row, rowInd) => {
             return (
               <div style={styles.bbRow}>
-                {row.map(item => (
-                  <div style={styles.bbCell} onClick={onBoggleCellClick}>
+                {row.map((item, colInd) => (
+                  <div
+                    style={styles.bbCell}
+                    onClick={e => onBoggleCellClick(e, rowInd, colInd)}
+                  >
+                    {/* <p>row: {rowInd}</p>
+                    <p>column: {colInd}</p> */}
                     {item}
                   </div>
                 ))}

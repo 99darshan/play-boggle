@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 export default function Timer({ totalTimeInSec }) {
   const [timeRemaining, setTimeRemaining] = useState(totalTimeInSec);
   useEffect(() => {
-    console.log(timeRemaining);
-    console.log("use effect");
+    //console.log(timeRemaining);
+    //console.log("use effect");
     // stop timer when timeRemaining is 0 TODO: display game end views
     if (!timeRemaining) return;
     const timerIntervalId = setInterval(
