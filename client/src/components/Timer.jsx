@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { BoggleContext } from "../state/boggleContext";
-
+import { END_GAME } from "../state/boggleActionTypes";
 export default function Timer({ totalTimeInSec }) {
   let { state, dispatch } = useContext(BoggleContext);
   const [timeRemaining, setTimeRemaining] = useState(totalTimeInSec);
@@ -11,7 +11,7 @@ export default function Timer({ totalTimeInSec }) {
     //console.log("use effect");
     // stop timer when timeRemaining is 0 TODO: display game end views
     if (!timeRemaining) {
-      dispatch({ type: "END_GAME", payload: { hasGameEnded: true } });
+      dispatch({ type: END_GAME, payload: { hasGameEnded: true } });
       return;
     }
     const timerIntervalId = setInterval(() => {
