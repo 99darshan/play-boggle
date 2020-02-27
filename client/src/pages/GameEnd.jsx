@@ -1,9 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import * as routes from "../constants/routeConstants";
 
-export default function GameEnd() {
+function GameEnd() {
   return (
-    <>
-      <p> End game route!!</p>
-    </>
+    <div>
+      <p>Game Over</p>
+      <Link to={routes.GAME}>Play Again</Link>
+    </div>
   );
 }
+
+export default GameEnd;

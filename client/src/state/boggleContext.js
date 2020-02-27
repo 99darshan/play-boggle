@@ -1,4 +1,3 @@
-
 import React, { createContext,useReducer } from "react";
 import {boggleReducer} from './boggleReducer';
 
@@ -8,6 +7,8 @@ const initialBoggleState={
     // TODO: board and validWords will be fetched from server later
     board:[['a','d','r'],['d','t','c'],['i','j','o']],
     validWords:["test","dummy","list"],
+    hasGameEnded: false,
+    totalTimeInSec: 5
 }
 
 export const BoggleContext = createContext();

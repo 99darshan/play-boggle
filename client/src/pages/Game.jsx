@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Timer from "../components/Timer";
+import { BoggleContext } from "../state/boggleContext";
+import { Redirect } from "react-router-dom";
+import * as routes from "../constants/routeConstants";
 
 const board = [
   ["a", "a", "a"],
@@ -27,6 +30,8 @@ export default function Game() {
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
+  let { state, dispatch } = useContext(BoggleContext);
+
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
     // TODO: display toast messages on same correct and word input multiple times
@@ -41,6 +46,7 @@ export default function Game() {
       setIncorrectWords([...incorrectWords, inputWord]);
     }
     setInputWord("");
+    setValidAdjacentcells([]);
   };
 
   function onBoggleCellClick(e, currentRow, currentCol) {
@@ -104,8 +110,12 @@ export default function Game() {
 
   return (
     <>
+      <p>
+        has game ended {state.hasGameEnded} and {state.totalTimeInSec}
+      </p>
+      {state.hasGameEnded && <Redirect to={routes.GAME_END} />}
       <h2>Boggle</h2>
-      <Timer totalTimeInSec={180} />
+      <Timer totalTimeInSec={state.totalTimeInSec} />
       {/* Board */}
       <div style={styles.boggleBoardContainer}>
         <div style={styles.boggleBoard}>
