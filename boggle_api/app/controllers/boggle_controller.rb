@@ -30,6 +30,7 @@ class BoggleController < ApplicationController
         #    puts(word)
         #    puts(hash)
         #end
-        render json:{status:'SUCESS FROM index route'}
+        # TODO: exception handling
+        render json:{board:boggle.board, words:boggle.boggle_words}
     end
 end
