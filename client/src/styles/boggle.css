@@ -141,4 +141,40 @@ GAME PAGE STYLES
     font-size: 3vw;
   }
 }
+
+.game-wrapper .user-input-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid red;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 20vw;
+}
+
+.game-wrapper .user-input-wrapper p {
+  font-size: 24px;
+  font-family: "Luckiest Guy";
+  letter-spacing: 2px;
+}
+
+.game-wrapper .user-input-wrapper .user-actions {
+  min-width: 10vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: 1px solid blue;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: teal;
+  font-weight: bold;
+  font-size: 50px;
+}
 /*# sourceMappingURL=boggle.css.map */

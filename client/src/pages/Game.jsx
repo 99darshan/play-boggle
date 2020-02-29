@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
 import httpService from "../services/httpService";
 import "../styles/boggle.scss";
+import { GiCancel } from "react-icons/gi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 import {
   FETCH_BOGGLE_ENDPOINT_SUCCESS,
@@ -140,6 +142,25 @@ export default function Game() {
                 })}
               </div>
             </div>
+            <div className="user-input-wrapper">
+              <p>{inputWord}</p>
+
+              <div className="user-actions">
+                <div className="submit-input" onClick={onWordSubmitted}>
+                  <IoMdCheckmarkCircleOutline />
+                </div>
+                <div
+                  className="cancel-input"
+                  onClick={e => {
+                    setInputWord("");
+                    setValidAdjacentcells([]);
+                  }}
+                >
+                  <GiCancel />
+                </div>
+              </div>
+            </div>
+
             {/* Input Field */}
             <div>
               {inputMode === INPUT_MODES.textField && (
@@ -151,16 +172,6 @@ export default function Game() {
                 />
               )}
 
-              <p>Input Word: {inputWord}</p>
-              <button
-                onClick={e => {
-                  setInputWord("");
-                  setValidAdjacentcells([]);
-                }}
-              >
-                Reset
-              </button>
-              <button onClick={onWordSubmitted}>Submit Word</button>
               <button
                 onClick={() =>
                   setInputMode(

@@ -99,4 +99,28 @@ GAME PAGE STYLES
       }
     }
   }
+
+  // TODO: make mobile first, fix widths and font sizes and colors, add event handlers
+  .user-input-wrapper {
+    display: flex;
+    border: 1px solid red;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 20vw;
+    p {
+      font-size: 24px;
+      font-family: $luckiest-guy;
+      letter-spacing: 2px;
+    }
+    .user-actions {
+      min-width: 10vw;
+      display: flex;
+      border: 1px solid blue;
+      justify-content: space-around;
+      align-items: center;
+      color: teal;
+      font-weight: bold;
+      font-size: 50px;
+    }
+  }
 }
