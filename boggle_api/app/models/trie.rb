@@ -12,9 +12,8 @@ class Trie
     end
 
     def insert(word)
-        puts('inserting word: ' + word)
+        # puts('inserting word: ' + word)
         children = @root.child_nodes
-        node = nil
         word.split('').each_with_index do |letter, index|
             if children.key?(letter)
                 node = children[letter]
@@ -25,8 +24,8 @@ class Trie
                 children = node.child_nodes
             end
             #puts('index is: ' + index.to_s + ' letter is: ' + letter.to_s + ' word length is ' + (word.length-1).to_s)
-            if index == word.length - 1 
-                #puts('setting is valid to true')
+             if index == word.length - 1 
+                # puts("#{word} setting is valid to true #{index} == #{word.length-1}")
                 node.is_valid_word = true
             end
         end
@@ -40,16 +39,14 @@ class Trie
                 node = children[letter]
                 children = node.child_nodes
             else
-                return {"is_valid_word" => false}
+                return {"is_valid_word" => false, "is_valid_prefix"=> false}
             end
         end
 
-        if node == nil 
-            return {"is_valid_word" => false, "is_valid_prefix" => false}
-            
-        else 
-            #puts('is valid..')
+        if node
             return {"is_valid_word" => node.is_valid_word, "is_valid_prefix" => true}
+        else 
+            return {"is_valid_word" => false, "is_valid_prefix" => false}     
         end
     end
 
