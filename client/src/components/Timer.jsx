@@ -11,7 +11,7 @@ export default function Timer({ totalTimeInSec }) {
     //console.log("use effect");
     // stop timer when timeRemaining is 0 TODO: display game end views
     if (!timeRemaining) {
-      dispatch({ type: END_GAME, payload: { hasGameEnded: true } });
+      dispatch({ type: END_GAME });
       return;
     }
     const timerIntervalId = setInterval(() => {

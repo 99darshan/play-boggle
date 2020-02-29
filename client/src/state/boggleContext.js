@@ -5,10 +5,11 @@ const initialBoggleState={
     isFetching: false,
     hasError: false,
     // TODO: board and validWords will be fetched from server later
-    board:[['a','d','r'],['d','t','c'],['i','j','o']],
-    validWords:["test","dummy","list"],
+    boggleBoard:[],
+    validWords:[],
     hasGameEnded: false,
-    totalTimeInSec: 5
+    totalTimeInSec: 180,
+    error: ''
 }
 
 export const BoggleContext = createContext();

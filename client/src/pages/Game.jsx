@@ -1,23 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Timer from "../components/Timer";
 import { BoggleContext } from "../state/boggleContext";
 import { Redirect } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
-
-const board = [
-  ["a", "a", "a"],
-  ["m", "n", "m"],
-  ["x", "y", "z"]
-];
-
-const validWordsInBoggle = [
-  "apple",
-  "banana",
-  "ninja",
-  "test",
-  "valid",
-  "words"
-];
+import httpService from "../services/httpService";
+import {
+  FETCH_BOGGLE_ENDPOINT_SUCCESS,
+  API_FETCH_START,
+  API_FETCH_ERROR
+} from "../state/boggleActionTypes";
 
 const INPUT_MODES = {
   textField: "textFieldInputMode",
@@ -32,12 +23,23 @@ export default function Game() {
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
   let { state, dispatch } = useContext(BoggleContext);
 
+  // fetch random boggle board and its solution on game page load
+  useEffect(() => {
+    dispatch({ type: API_FETCH_START });
+    httpService.Get(
+      routes.BOGGLE_ENDPOINT,
+      dispatch,
+      FETCH_BOGGLE_ENDPOINT_SUCCESS,
+      API_FETCH_ERROR
+    );
+  }, []);
+
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
     // TODO: display toast messages on same correct and word input multiple times
     // TODO: on selection by click display toast when non-adjcent words are selected
     // TODO: based on API fetched vaid string, do check insensative comparison
-    let isValidBoggleWord = validWordsInBoggle.includes(inputWord);
+    let isValidBoggleWord = state.validWords.includes(inputWord);
 
     if (isValidBoggleWord && !correctWords.includes(inputWord)) {
       setCorrectWords([...correctWords, inputWord]);
@@ -87,9 +89,9 @@ export default function Game() {
       possibleAdjCellIndices.forEach(posIndex => {
         if (
           currentRow + posIndex[0] >= 0 &&
-          currentRow + posIndex[0] < 3 &&
+          currentRow + posIndex[0] < 4 &&
           currentCol + posIndex[1] >= 0 &&
-          currentCol + posIndex[1] < 3
+          currentCol + posIndex[1] < 4
         )
           validAdjCells.push([
             currentRow + posIndex[0],
@@ -114,12 +116,12 @@ export default function Game() {
         has game ended {state.hasGameEnded} and {state.totalTimeInSec}
       </p>
       {state.hasGameEnded && <Redirect to={routes.GAME_END} />}
-      <h2>Boggle</h2>
+
       <Timer totalTimeInSec={state.totalTimeInSec} />
       {/* Board */}
       <div style={styles.boggleBoardContainer}>
         <div style={styles.boggleBoard}>
-          {board.map((row, rowInd) => {
+          {state.boggleBoard.map((row, rowInd) => {
             return (
               <div style={styles.bbRow}>
                 {row.map((item, colInd) => (
@@ -127,8 +129,6 @@ export default function Game() {
                     style={styles.bbCell}
                     onClick={e => onBoggleCellClick(e, rowInd, colInd)}
                   >
-                    {/* <p>row: {rowInd}</p>
-                    <p>column: {colInd}</p> */}
                     {item}
                   </div>
                 ))}
