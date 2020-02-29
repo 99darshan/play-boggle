@@ -116,74 +116,79 @@ export default function Game() {
         has game ended {state.hasGameEnded} and {state.totalTimeInSec}
       </p>
       {state.hasGameEnded && <Redirect to={routes.GAME_END} />}
-
-      <Timer totalTimeInSec={state.totalTimeInSec} />
-      {/* Board */}
-      <div style={styles.boggleBoardContainer}>
-        <div style={styles.boggleBoard}>
-          {state.boggleBoard.map((row, rowInd) => {
-            return (
-              <div style={styles.bbRow}>
-                {row.map((item, colInd) => (
-                  <div
-                    style={styles.bbCell}
-                    onClick={e => onBoggleCellClick(e, rowInd, colInd)}
-                  >
-                    {item}
+      {state.isFetching ? (
+        <p>is fetching data...</p>
+      ) : (
+        <React.Fragment>
+          <Timer totalTimeInSec={state.totalTimeInSec} />
+          {/* Board */}
+          <div style={styles.boggleBoardContainer}>
+            <div style={styles.boggleBoard}>
+              {state.boggleBoard.map((row, rowInd) => {
+                return (
+                  <div style={styles.bbRow}>
+                    {row.map((item, colInd) => (
+                      <div
+                        style={styles.bbCell}
+                        onClick={e => onBoggleCellClick(e, rowInd, colInd)}
+                      >
+                        {item}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      {/* Input Field */}
-      <div style={styles.bbInputField}>
-        {inputMode === INPUT_MODES.textField && (
-          <input
-            type="text"
-            name="inputWord"
-            onChange={e => setInputWord(e.target.value)}
-            value={inputWord}
-          />
-        )}
+                );
+              })}
+            </div>
+          </div>
+          {/* Input Field */}
+          <div style={styles.bbInputField}>
+            {inputMode === INPUT_MODES.textField && (
+              <input
+                type="text"
+                name="inputWord"
+                onChange={e => setInputWord(e.target.value)}
+                value={inputWord}
+              />
+            )}
 
-        <p>Input Word: {inputWord}</p>
-        <button
-          onClick={e => {
-            setInputWord("");
-            setValidAdjacentcells([]);
-          }}
-        >
-          Reset
-        </button>
-        <button onClick={onWordSubmitted}>Submit Word</button>
-        <button
-          onClick={() =>
-            setInputMode(
-              inputMode === INPUT_MODES.textField
-                ? INPUT_MODES.boardClick
-                : INPUT_MODES.textField
-            )
-          }
-        >
-          {inputMode === INPUT_MODES.textField
-            ? "Switch to Board Click Mode"
-            : "Switch to Text Field Mode"}
-        </button>
-        <div>
-          <p>Correct Words List: </p>
-          {correctWords.map(word => (
-            <p>{word}</p>
-          ))}
-        </div>
-        <div>
-          <p>Incorrect Words List: </p>
-          {incorrectWords.map(word => (
-            <p>{word}</p>
-          ))}
-        </div>
-      </div>
+            <p>Input Word: {inputWord}</p>
+            <button
+              onClick={e => {
+                setInputWord("");
+                setValidAdjacentcells([]);
+              }}
+            >
+              Reset
+            </button>
+            <button onClick={onWordSubmitted}>Submit Word</button>
+            <button
+              onClick={() =>
+                setInputMode(
+                  inputMode === INPUT_MODES.textField
+                    ? INPUT_MODES.boardClick
+                    : INPUT_MODES.textField
+                )
+              }
+            >
+              {inputMode === INPUT_MODES.textField
+                ? "Switch to Board Click Mode"
+                : "Switch to Text Field Mode"}
+            </button>
+            <div>
+              <p>Correct Words List: </p>
+              {correctWords.map(word => (
+                <p>{word}</p>
+              ))}
+            </div>
+            <div>
+              <p>Incorrect Words List: </p>
+              {incorrectWords.map(word => (
+                <p>{word}</p>
+              ))}
+            </div>
+          </div>
+        </React.Fragment>
+      )}
     </>
   );
 }
