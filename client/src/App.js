@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import BoggleProvider from './state/boggleContext';
 import Home from './pages/Home';

@@ -1,0 +1,36 @@
+/**
+HOME PAGE STYLES
+**/
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+
+  h1 {
+    margin: 0;
+    font-family: "Luckiest Guy";
+    font-size: 12vw;
+    letter-spacing: 4px;
+  }
+
+  .desc-wrapper {
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    margin-top: 16px;
+
+    .rules,
+    .about {
+      border: 1px solid green;
+      padding: 8px;
+    }
+
+    @media all and (min-width: 650px) {
+      width: 50vw;
+    }
+  }
+}

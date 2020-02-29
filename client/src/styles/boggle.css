@@ -1,0 +1,53 @@
+/**
+HOME PAGE STYLES
+**/
+.home-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.home-wrapper h1 {
+  margin: 0;
+  font-family: "Luckiest Guy";
+  font-size: 12vw;
+  letter-spacing: 4px;
+}
+
+.home-wrapper .desc-wrapper {
+  width: 95vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid red;
+  margin-top: 16px;
+}
+
+.home-wrapper .desc-wrapper .rules,
+.home-wrapper .desc-wrapper .about {
+  border: 1px solid green;
+  padding: 8px;
+}
+
+@media all and (min-width: 650px) {
+  .home-wrapper .desc-wrapper {
+    width: 50vw;
+  }
+}
+/*# sourceMappingURL=boggle.css.map */
