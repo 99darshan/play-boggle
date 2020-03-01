@@ -14,6 +14,19 @@ function GameEnd() {
           Play Again
         </button>
       </Link>
+
+      <div>
+        <p>Correct Words List: </p>
+        {state.correctWords.map(word => (
+          <p>{word}</p>
+        ))}
+      </div>
+      <div>
+        <p>Incorrect Words List: </p>
+        {state.incorrectWords.map(word => (
+          <p>{word}</p>
+        ))}
+      </div>
     </div>
   );
 }

@@ -3,10 +3,13 @@ import {
   START_GAME,
   API_FETCH_START,
   API_FETCH_ERROR,
-  FETCH_BOGGLE_ENDPOINT_SUCCESS
+  FETCH_BOGGLE_ENDPOINT_SUCCESS,
+  ADD_CORRECT_WORDS,
+  ADD_INCORRECT_WORDS,
+  UPDATE_SCORE
 } from "./boggleActionTypes";
-export const boggleReducer = (state, action) => {
-  switch (action.type) {
+export const boggleReducer = (state, {type,payload}) => {
+  switch (type) {
     case END_GAME:
       return { ...state, hasGameEnded: true };
     case START_GAME:
@@ -18,16 +21,32 @@ export const boggleReducer = (state, action) => {
         ...state,
         isFetching: false,
         hasError: true,
-        error: action.payload.error
+        error: payload.error
       };
     case FETCH_BOGGLE_ENDPOINT_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        boggleBoard: [...payload.board],
+        validWords: [...payload.words],
+        hasError: false
+      };
+    case ADD_CORRECT_WORDS:
         return{
             ...state,
-            isFetching: false,
-            boggleBoard: [...action.payload.board],
-            validWords: [...action.payload.words],
-            hasError: false
+            correctWords:[...payload.correctWords]
+        };
+    case ADD_INCORRECT_WORDS:
+        return{
+            ...state,
+            incorrectWords:[...payload.incorrectWords]
         }
+    case UPDATE_SCORE:
+        return{
+            ...state,
+            score:payload.score
+        }
+    
     default:
       return { ...state };
   }

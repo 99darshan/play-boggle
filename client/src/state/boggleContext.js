@@ -1,16 +1,6 @@
 import React, { createContext,useReducer } from "react";
 import {boggleReducer} from './boggleReducer';
-
-const initialBoggleState={
-    isFetching: false,
-    hasError: false,
-    // TODO: board and validWords will be fetched from server later
-    boggleBoard:[],
-    validWords:[],
-    hasGameEnded: false,
-    totalTimeInSec: 180,
-    error: ''
-}
+import initialBoggleState from './boggleStore';
 
 export const BoggleContext = createContext();
 export default function BoggleProvider(props){

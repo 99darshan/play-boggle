@@ -12,7 +12,10 @@ import Toast from "../components/Toast";
 import {
   FETCH_BOGGLE_ENDPOINT_SUCCESS,
   API_FETCH_START,
-  API_FETCH_ERROR
+  API_FETCH_ERROR,
+  ADD_CORRECT_WORDS,
+  ADD_INCORRECT_WORDS,
+  UPDATE_SCORE
 } from "../state/boggleActionTypes";
 
 const INPUT_MODES = {
@@ -22,8 +25,6 @@ const INPUT_MODES = {
 
 export default function Game() {
   const [inputWord, setInputWord] = useState("");
-  const [correctWords, setCorrectWords] = useState([]);
-  const [incorrectWords, setIncorrectWords] = useState([]);
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
   const [shouldOpenToast, setShouldOpenToast] = useState(false);
@@ -57,12 +58,22 @@ export default function Game() {
 
     let isValidBoggleWord = state.validWords.includes(inputWord);
 
-    if (isValidBoggleWord && !correctWords.includes(inputWord)) {
-      setCorrectWords([...correctWords, inputWord]);
+    if (isValidBoggleWord && !state.correctWords.includes(inputWord)) {
+      dispatch({
+        type: ADD_CORRECT_WORDS,
+        payload: { correctWords: [...state.correctWords, inputWord] }
+      });
+      dispatch({
+        type: UPDATE_SCORE,
+        payload: { score: state.score + inputWord.length }
+      });
       updateToastState(true, `Yay!! ${inputWord} is CORRECT`, "success");
     }
-    if (!isValidBoggleWord && !incorrectWords.includes(inputWord)) {
-      setIncorrectWords([...incorrectWords, inputWord]);
+    if (!isValidBoggleWord && !state.incorrectWords.includes(inputWord)) {
+      dispatch({
+        type: ADD_INCORRECT_WORDS,
+        payload: { incorrectWords: [...state.incorrectWords, inputWord] }
+      });
       updateToastState(true, `ERR!! ${inputWord} is WRONG`, "error");
     }
     setInputWord("");
@@ -140,7 +151,7 @@ export default function Game() {
               <Timer totalTimeInSec={state.totalTimeInSec} />
               <div className="score">
                 <span>&#x1F389;</span>
-                <h2>score: 10</h2>
+                <h2>score: {state.score}</h2>
               </div>
             </div>
             {/* Board */}
@@ -208,18 +219,6 @@ export default function Game() {
                   ? "Switch to Board Click Mode"
                   : "Switch to Text Field Mode"}
               </button>
-              <div>
-                <p>Correct Words List: </p>
-                {correctWords.map(word => (
-                  <p>{word}</p>
-                ))}
-              </div>
-              <div>
-                <p>Incorrect Words List: </p>
-                {incorrectWords.map(word => (
-                  <p>{word}</p>
-                ))}
-              </div>
             </div>
             <Toast
               open={shouldOpenToast}
