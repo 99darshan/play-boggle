@@ -18,14 +18,8 @@ import {
   UPDATE_SCORE
 } from "../state/boggleActionTypes";
 
-const INPUT_MODES = {
-  textField: "textFieldInputMode",
-  boardClick: "boardClickInputMode"
-};
-
 export default function Game() {
   const [inputWord, setInputWord] = useState("");
-  const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
   // stores the cells [row,col] that make up the current input word
   const [usedCellsByCurrentWord, setUsedCellsByCurrentWord] = useState([]);
@@ -220,7 +214,7 @@ export default function Game() {
             </div>
             <div className="user-input-wrapper">
               <div className="user-input">
-                <p>{inputWord}</p>
+                {!inputWord ? <p> 🔤 🖱️👆</p> : <p>{inputWord}</p>}
               </div>
 
               <div className="user-actions">
@@ -239,32 +233,6 @@ export default function Game() {
                   <Cancel fontSize="large" color="error" />
                 </IconButton>
               </div>
-            </div>
-
-            {/* Input Field */}
-            <div>
-              {inputMode === INPUT_MODES.textField && (
-                <input
-                  type="text"
-                  name="inputWord"
-                  onChange={e => setInputWord(e.target.value)}
-                  value={inputWord}
-                />
-              )}
-
-              <button
-                onClick={() =>
-                  setInputMode(
-                    inputMode === INPUT_MODES.textField
-                      ? INPUT_MODES.boardClick
-                      : INPUT_MODES.textField
-                  )
-                }
-              >
-                {inputMode === INPUT_MODES.textField
-                  ? "Switch to Board Click Mode"
-                  : "Switch to Text Field Mode"}
-              </button>
             </div>
             <Toast
               open={shouldOpenToast}
