@@ -91,7 +91,7 @@ GAME PAGE STYLES
       justify-content: center;
       font-family: $luckiest-guy;
       font-size: 8vw;
-
+      background-color: rebeccapurple;
       @media all and (min-width: $small) {
         width: 15vw;
         height: 15vw;
@@ -107,6 +107,9 @@ GAME PAGE STYLES
         height: 8vw;
         font-size: 3vw;
       }
+    }
+    .board-cell-used {
+      background-color: red;
     }
   }
 

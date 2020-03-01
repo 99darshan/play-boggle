@@ -27,6 +27,8 @@ export default function Game() {
   const [inputWord, setInputWord] = useState("");
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
+  // stores the cells [row,col] that make up the current input word
+  const [usedCellsByCurrentWord, setUsedCellsByCurrentWord] = useState([]);
   const [shouldOpenToast, setShouldOpenToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("info");
@@ -51,11 +53,14 @@ export default function Game() {
 
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
-    // TODO: display toast messages on same correct and word input multiple times
-    // TODO: on selection by click display toast when non-adjcent words are selected
-    // TODO: based on API fetched vaid string, do check insensative comparison
-    if (!inputWord)
+
+    // reset cells used by current word
+    setUsedCellsByCurrentWord([]);
+
+    if (!inputWord) {
       updateToastState(true, `Oops, Empty Input !! 🤦‍♀️ 😩 🤯`, "info");
+      return;
+    }
 
     let isValidBoggleWord = state.validWords.includes(inputWord);
 
@@ -64,6 +69,7 @@ export default function Game() {
       state.incorrectWords.includes(inputWord)
     ) {
       updateToastState(true, `${inputWord} is already submitted !! 🤦‍♀️ 😩 🤯`);
+      return;
     }
 
     if (isValidBoggleWord && !state.correctWords.includes(inputWord)) {
@@ -106,14 +112,28 @@ export default function Game() {
         typeof currentRow +
         typeof currentCol
     );
-    // TODO: if the clicked word is adjacent word, else display a toast message
+    // if any toast is yet to auto disapper, hide them if user clicks on a cell for new input
+    setShouldOpenToast(false);
+    console.table(usedCellsByCurrentWord);
+
+    let isCurrentCellAlreadySelected = usedCellsByCurrentWord.some(
+      c => currentRow === c[0] && currentCol === c[1]
+    );
+
+    if (isCurrentCellAlreadySelected) {
+      updateToastState(true, `Cell Already Selected !! 🤦‍♀️ 😩 🤯`, "info");
+      return;
+    }
+
     console.log("cell clikced: " + e.target.textContent);
     //console.table(validAdjacentCells);
     //setInputWord(inputWord + e.target.textContent);
     let isCurrentRowColPresentInValidAdjCells = validAdjacentCells.some(cor => {
       return currentRow === cor[0] && currentCol === cor[1];
     });
+
     if (
+      // checking for 0 handles the intial state,for first click validAjacentCells will be empty
       validAdjacentCells.length === 0 ||
       isCurrentRowColPresentInValidAdjCells
     ) {
@@ -144,7 +164,11 @@ export default function Game() {
           ]);
       });
       setValidAdjacentcells([...validAdjCells]);
-      //console.table(validAdjacentCells);
+      // add to the cells used in building the current word
+      setUsedCellsByCurrentWord([
+        ...usedCellsByCurrentWord,
+        [currentRow, currentCol]
+      ]);
     }
     if (
       validAdjacentCells.length > 0 &&
@@ -177,7 +201,13 @@ export default function Game() {
                     <div className="board-row">
                       {row.map((item, colInd) => (
                         <div
-                          className="board-cell"
+                          className={`board-cell ${
+                            usedCellsByCurrentWord.some(
+                              c => rowInd === c[0] && colInd === c[1]
+                            )
+                              ? "board-cell-used"
+                              : ""
+                          }`}
                           onClick={e => onBoggleCellClick(e, rowInd, colInd)}
                         >
                           {item}
@@ -199,10 +229,11 @@ export default function Game() {
                 </IconButton>
 
                 <IconButton
-                  aria-label="Submit"
+                  aria-label="Reset"
                   onClick={e => {
                     setInputWord("");
                     setValidAdjacentcells([]);
+                    setUsedCellsByCurrentWord([]);
                   }}
                 >
                   <Cancel fontSize="large" color="error" />

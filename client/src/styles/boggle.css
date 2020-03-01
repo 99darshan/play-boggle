@@ -128,6 +128,7 @@ GAME PAGE STYLES
           justify-content: center;
   font-family: "Luckiest Guy";
   font-size: 8vw;
+  background-color: rebeccapurple;
 }
 
 @media all and (min-width: 600px) {
@@ -152,6 +153,10 @@ GAME PAGE STYLES
     height: 8vw;
     font-size: 3vw;
   }
+}
+
+.game-wrapper .boggle-board-wrapper .board-cell-used {
+  background-color: red;
 }
 
 .game-wrapper .user-input-wrapper {
