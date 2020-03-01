@@ -7,6 +7,21 @@ $extra-large: 1200px;
 /** FONTS **/
 $luckiest-guy: "Luckiest Guy";
 
+/** custom animation **/
+@keyframes rotateIn {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    transform-origin: center;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
 /**
 HOME PAGE STYLES
 **/
@@ -17,6 +32,15 @@ HOME PAGE STYLES
   align-items: center;
   min-height: 100vh;
   padding: 4vh 0px;
+
+  .github-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: rotateIn;
+  }
 
   h1 {
     margin: 0;

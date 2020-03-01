@@ -1,5 +1,39 @@
 /** MEDIA QUERY BREAKPOINTS **/
 /** FONTS **/
+/** custom animation **/
+@-webkit-keyframes rotateIn {
+  from {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+            transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes rotateIn {
+  from {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+            transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
 /**
 HOME PAGE STYLES
 **/
@@ -19,6 +53,18 @@ HOME PAGE STYLES
           align-items: center;
   min-height: 100vh;
   padding: 4vh 0px;
+}
+
+.home-wrapper .github-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: rotateIn;
+          animation-name: rotateIn;
 }
 
 .home-wrapper h1 {

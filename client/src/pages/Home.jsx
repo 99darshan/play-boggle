@@ -1,11 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GAME } from "../constants/routeConstants";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import { IconButton } from "@material-ui/core";
+
 import "../styles/boggle.scss";
 export default function Home() {
   return (
     <>
       <div className="home-wrapper">
+        <div className="github-button">
+          <IconButton
+            aria-label="Github"
+            onClick={() => {
+              window.open("https://github.com/99darshan/play-boggle", "_blank");
+            }}
+          >
+            <GitHubIcon fontSize="large" color="secondary" />
+          </IconButton>
+        </div>
+
         <h1>BOGGLE</h1>
         <Link to={GAME}>
           <button>Play Boggle</button>
