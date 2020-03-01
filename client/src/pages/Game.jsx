@@ -59,11 +59,10 @@ export default function Game() {
     let isValidBoggleWord = state.validWords.includes(inputWord);
 
     if (
-      state.correctWords.includes(inputWord) ||
-      state.incorrectWords.includes(inputWord)
+      state.correctWords.includes(inputWord)
+      // || state.incorrectWords.includes(inputWord)
     ) {
       updateToastState(true, `${inputWord} is already submitted !! 🤦‍♀️ 😩 🤯`);
-      return;
     }
 
     if (isValidBoggleWord && !state.correctWords.includes(inputWord)) {
@@ -81,7 +80,10 @@ export default function Game() {
         "success"
       );
     }
-    if (!isValidBoggleWord && !state.incorrectWords.includes(inputWord)) {
+    if (
+      !isValidBoggleWord
+      //&& !state.incorrectWords.includes(inputWord)
+    ) {
       dispatch({
         type: ADD_INCORRECT_WORDS,
         payload: { incorrectWords: [...state.incorrectWords, inputWord] }
