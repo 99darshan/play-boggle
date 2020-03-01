@@ -54,6 +54,16 @@ GAME PAGE STYLES
   min-height: 100vh;
   padding: 4vh 0px;
 
+  // timer and score section styles
+  .timer-score-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+    width: 90%;
+    padding: 0px 10px;
+  }
+
+  // Boggle Board Styles
   .boggle-board-wrapper {
     display: flex;
     justify-content: center;
@@ -100,23 +110,29 @@ GAME PAGE STYLES
     }
   }
 
-  // TODO: make mobile first, fix widths and font sizes and colors, add event handlers
+  // User Input Styles
   .user-input-wrapper {
-    display: flex;
     border: 1px solid red;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    min-width: 20vw;
-    p {
-      font-size: 24px;
-      font-family: $luckiest-guy;
-      letter-spacing: 2px;
+    padding: 12px;
+    flex-direction: column;
+    .user-input {
+      border: 1px solid black;
+      min-height: 30px;
+      min-width: 80vw;
+      p {
+        margin: 0px;
+        font-size: 24px;
+        font-family: $luckiest-guy;
+        letter-spacing: 2px;
+        text-align: center;
+      }
     }
     .user-actions {
-      min-width: 10vw;
       display: flex;
       border: 1px solid blue;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       color: teal;
       font-weight: bold;

@@ -71,6 +71,18 @@ GAME PAGE STYLES
   padding: 4vh 0px;
 }
 
+.game-wrapper .timer-score-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: 1px solid red;
+  width: 90%;
+  padding: 0px 10px;
+}
+
 .game-wrapper .boggle-board-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,33 +155,42 @@ GAME PAGE STYLES
 }
 
 .game-wrapper .user-input-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   border: 1px solid red;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-width: 20vw;
+  padding: 12px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.game-wrapper .user-input-wrapper p {
+.game-wrapper .user-input-wrapper .user-input {
+  border: 1px solid black;
+  min-height: 30px;
+  min-width: 80vw;
+}
+
+.game-wrapper .user-input-wrapper .user-input p {
+  margin: 0px;
   font-size: 24px;
   font-family: "Luckiest Guy";
   letter-spacing: 2px;
+  text-align: center;
 }
 
 .game-wrapper .user-input-wrapper .user-actions {
-  min-width: 10vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border: 1px solid blue;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

@@ -5,8 +5,9 @@ import { Redirect } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
 import httpService from "../services/httpService";
 import "../styles/boggle.scss";
-import { GiCancel } from "react-icons/gi";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { IconButton } from "@material-ui/core";
+import { CheckCircle, Cancel } from "@material-ui/icons";
+import Toast from "../components/Toast";
 
 import {
   FETCH_BOGGLE_ENDPOINT_SUCCESS,
@@ -25,6 +26,9 @@ export default function Game() {
   const [incorrectWords, setIncorrectWords] = useState([]);
   const [inputMode, setInputMode] = useState(INPUT_MODES.boardClick);
   const [validAdjacentCells, setValidAdjacentcells] = useState([]);
+  const [shouldOpenToast, setShouldOpenToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("info");
   let { state, dispatch } = useContext(BoggleContext);
 
   // fetch random boggle board and its solution on game page load
@@ -38,18 +42,28 @@ export default function Game() {
     );
   }, []);
 
+  function updateToastState(shouldOpen, message, type) {
+    setShouldOpenToast(shouldOpen);
+    setToastMessage(message);
+    setToastType(type);
+  }
+
   const onWordSubmitted = () => {
     console.log("submitted word " + inputWord);
     // TODO: display toast messages on same correct and word input multiple times
     // TODO: on selection by click display toast when non-adjcent words are selected
     // TODO: based on API fetched vaid string, do check insensative comparison
+    if (!inputWord) updateToastState(true, `Invalid or Empty Input !!`, "info");
+
     let isValidBoggleWord = state.validWords.includes(inputWord);
 
     if (isValidBoggleWord && !correctWords.includes(inputWord)) {
       setCorrectWords([...correctWords, inputWord]);
+      updateToastState(true, `Yay!! ${inputWord} is CORRECT`, "success");
     }
     if (!isValidBoggleWord && !incorrectWords.includes(inputWord)) {
       setIncorrectWords([...incorrectWords, inputWord]);
+      updateToastState(true, `ERR!! ${inputWord} is WRONG`, "error");
     }
     setInputWord("");
     setValidAdjacentcells([]);
@@ -122,7 +136,13 @@ export default function Game() {
           <p>is fetching data...</p>
         ) : (
           <React.Fragment>
-            <Timer totalTimeInSec={state.totalTimeInSec} />
+            <div className="timer-score-wrapper">
+              <Timer totalTimeInSec={state.totalTimeInSec} />
+              <div className="score">
+                <span>&#x1F389;</span>
+                <h2>score: 10</h2>
+              </div>
+            </div>
             {/* Board */}
             <div className="boggle-board-wrapper">
               <div className="boggle-board">
@@ -143,21 +163,24 @@ export default function Game() {
               </div>
             </div>
             <div className="user-input-wrapper">
-              <p>{inputWord}</p>
+              <div className="user-input">
+                <p>{inputWord}</p>
+              </div>
 
               <div className="user-actions">
-                <div className="submit-input" onClick={onWordSubmitted}>
-                  <IoMdCheckmarkCircleOutline />
-                </div>
-                <div
-                  className="cancel-input"
+                <IconButton aria-label="Submit" onClick={onWordSubmitted}>
+                  <CheckCircle fontSize="large" color="primary" />
+                </IconButton>
+
+                <IconButton
+                  aria-label="Submit"
                   onClick={e => {
                     setInputWord("");
                     setValidAdjacentcells([]);
                   }}
                 >
-                  <GiCancel />
-                </div>
+                  <Cancel fontSize="large" color="error" />
+                </IconButton>
               </div>
             </div>
 
@@ -198,6 +221,15 @@ export default function Game() {
                 ))}
               </div>
             </div>
+            <Toast
+              open={shouldOpenToast}
+              message={toastMessage}
+              type={toastType}
+              onClose={(e, reason) => {
+                setShouldOpenToast(false);
+                if (reason === "clickaway") return;
+              }}
+            />
           </React.Fragment>
         )}
       </div>
