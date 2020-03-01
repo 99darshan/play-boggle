@@ -151,7 +151,7 @@ export default function Game() {
       !isCurrentRowColPresentInValidAdjCells
     ) {
       console.log("invalid adjacent cell");
-      alert("invalid adjacent cell clicked!!"); // TODO: replace with a toast message
+      updateToastState(true, `Invalid Adjacent Letter !! 🤦‍♀️ 😩 🤯`, "info");
     }
   }
 
@@ -166,7 +166,6 @@ export default function Game() {
             <div className="timer-score-wrapper">
               <Timer totalTimeInSec={state.totalTimeInSec} />
               <div className="score">
-                <span>&#x1F389;</span>
                 <h2>score: {state.score}</h2>
               </div>
             </div>
