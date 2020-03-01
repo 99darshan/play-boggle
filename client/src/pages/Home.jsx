@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { GAME } from "../constants/routeConstants";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { IconButton } from "@material-ui/core";
-
+import PlayButton from "../components/PlayButton";
+import Divider from "@material-ui/core/Divider";
 import "../styles/boggle.scss";
 export default function Home() {
   return (
@@ -16,14 +17,16 @@ export default function Home() {
               window.open("https://github.com/99darshan/play-boggle", "_blank");
             }}
           >
-            <GitHubIcon fontSize="large" color="secondary" />
+            <GitHubIcon fontSize="large" color="info" />
           </IconButton>
         </div>
 
         <h1>BOGGLE</h1>
-        <Link to={GAME}>
-          <button>Play Boggle</button>
+
+        <Link to={GAME} style={{ textDecoration: "inherit", color: "inherit" }}>
+          <PlayButton label="Play" />
         </Link>
+
         <div className="desc-wrapper">
           <div className="about">
             <h4>About Game</h4>
@@ -34,27 +37,16 @@ export default function Home() {
               perferendis. Tenetur deleniti in modi vitae.
             </p>
           </div>
-          <div className="about">
-            <h4>Rules</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit iusto
-              a assumenda nesciunt architecto, pariatur, deserunt et sint velit
-              rem, quas excepturi veritatis repudiandae odit nam delectus eum
-              quam dignissimos. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Sit iusto a assumenda nesciunt architecto,
-              pariatur, deserunt et sint velit rem, quas excepturi veritatis
-              repudiandae odit nam delectus eum quam dignissimos.Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Sit iusto a assumenda
-              nesciunt architecto, pariatur, deserunt et sint velit rem, quas
-              excepturi veritatis repudiandae odit nam delectus eum quam
-              dignissimos.Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Sit iusto a assumenda nesciunt architecto, pariatur,
-              deserunt et sint velit rem, quas excepturi veritatis repudiandae
-              odit nam delectus eum quam dignissimos.Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Sit iusto a assumenda nesciunt
-              architecto, pariatur, deserunt et sint velit rem, quas excepturi
-              veritatis repudiandae odit nam delectus eum quam dignissimos.Lorem
-            </p>
+
+          <div className="footer">
+            <Divider />
+
+            <span>
+              Made with 💜 ☕ !💤 by{" "}
+              <a href="https://www.linkedin.com/in/99darshan/" target="_blank">
+                @99darshan
+              </a>
+            </span>
           </div>
         </div>
       </div>

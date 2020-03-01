@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { BoggleContext } from "../state/boggleContext";
 import { END_GAME } from "../state/boggleActionTypes";
-import TimerIcon from "@material-ui/icons/Timer";
 export default function Timer({ totalTimeInSec, wrapperCssClass }) {
   let { state, dispatch } = useContext(BoggleContext);
   const [timeRemaining, setTimeRemaining] = useState(totalTimeInSec);
