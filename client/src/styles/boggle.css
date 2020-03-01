@@ -140,7 +140,6 @@ GAME PAGE STYLES
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border: 1px solid red;
   width: 90%;
   padding: 0px 10px;
 }
@@ -148,7 +147,6 @@ GAME PAGE STYLES
 .game-wrapper .timer-score-wrapper .score,
 .game-wrapper .timer-score-wrapper .timer {
   display: inline-block;
-  border: 1px dotted darkblue;
   min-width: 15vw;
   font-size: 16px;
   font-weight: bold;
@@ -167,12 +165,10 @@ GAME PAGE STYLES
       -ms-flex-align: center;
           align-items: center;
   padding: 12px;
-  border: 1px solid green;
 }
 
 .game-wrapper .boggle-board-wrapper .boggle-board {
   width: 90vw;
-  border: 1px solid red;
 }
 
 .game-wrapper .boggle-board-wrapper .board-row {
@@ -201,7 +197,7 @@ GAME PAGE STYLES
           justify-content: center;
   font-family: "Luckiest Guy";
   font-size: 8vw;
-  background-color: rebeccapurple;
+  color: #424242;
 }
 
 @media all and (min-width: 600px) {
@@ -229,11 +225,10 @@ GAME PAGE STYLES
 }
 
 .game-wrapper .boggle-board-wrapper .board-cell-used {
-  background-color: red;
+  background-color: #212121;
 }
 
 .game-wrapper .user-input-wrapper {
-  border: 1px solid red;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -248,7 +243,6 @@ GAME PAGE STYLES
 }
 
 .game-wrapper .user-input-wrapper .user-input {
-  border: 1px solid black;
   min-height: 30px;
   min-width: 80vw;
 }
@@ -265,16 +259,18 @@ GAME PAGE STYLES
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border: 1px solid blue;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: teal;
   font-weight: bold;
   font-size: 50px;
+}
+
+.game-wrapper .user-input-wrapper .user-actions IconButton {
+  cursor: pointer;
 }
 
 /**
@@ -360,7 +356,7 @@ Game End page styles
 }
 
 /**
-play button
+play button component
 **/
 .play-button {
   border: 2px solid #333;
@@ -406,5 +402,30 @@ play button
   .play-button {
     width: 15vw;
   }
+}
+
+/**
+loader component
+**/
+.loader {
+  margin: 7vh;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.loader p {
+  margin: 4px;
 }
 /*# sourceMappingURL=boggle.css.map */

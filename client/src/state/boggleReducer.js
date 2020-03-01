@@ -8,12 +8,14 @@ import {
   ADD_INCORRECT_WORDS,
   UPDATE_SCORE
 } from "./boggleActionTypes";
+import initialBoggleState from './boggleStore';
 export const boggleReducer = (state, {type,payload}) => {
   switch (type) {
     case END_GAME:
       return { ...state, hasGameEnded: true };
+    // reset state to intial state when start game action is dispatched
     case START_GAME:
-      return { ...state, hasGameEnded: false };
+      return {...initialBoggleState};
     case API_FETCH_START:
       return { ...state, isFetching: true };
     case API_FETCH_ERROR:

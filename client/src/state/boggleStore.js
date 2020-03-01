@@ -4,7 +4,7 @@ const initialBoggleState={
     boggleBoard:[],
     validWords:[],
     hasGameEnded: false,
-    totalTimeInSec: 10,
+    totalTimeInSec: 180,
     error: '',
     correctWords:[],
     incorrectWords:[],

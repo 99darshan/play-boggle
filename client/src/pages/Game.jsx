@@ -8,6 +8,7 @@ import "../styles/boggle.scss";
 import { IconButton } from "@material-ui/core";
 import { CheckCircle, Cancel, EmojiEvents } from "@material-ui/icons";
 import Toast from "../components/Toast";
+import Loader from "../components/Loader";
 
 import {
   FETCH_BOGGLE_ENDPOINT_SUCCESS,
@@ -180,7 +181,7 @@ export default function Game() {
       <div className="game-wrapper">
         {state.hasGameEnded && <Redirect to={routes.GAME_END} />}
         {state.isFetching ? (
-          <p>is fetching data...</p>
+          <Loader cssClass="loader" />
         ) : (
           <React.Fragment>
             <h1>BOGGLE</h1>
