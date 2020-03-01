@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { BoggleContext } from "../state/boggleContext";
 import { END_GAME } from "../state/boggleActionTypes";
-export default function Timer({ totalTimeInSec }) {
+import TimerIcon from "@material-ui/icons/Timer";
+export default function Timer({ totalTimeInSec, wrapperCssClass }) {
   let { state, dispatch } = useContext(BoggleContext);
   const [timeRemaining, setTimeRemaining] = useState(totalTimeInSec);
   useEffect(() => {
     //console.log(timeRemaining);
-    //console.log("use effect");
-    // stop timer when timeRemaining is 0 TODO: display game end views
     if (!timeRemaining) {
       dispatch({ type: END_GAME });
       return;
@@ -24,7 +23,9 @@ export default function Timer({ totalTimeInSec }) {
   }, [timeRemaining]);
   return (
     <>
-      <h2>&#128368; {timeRemaining} seconds</h2>
+      <div className={wrapperCssClass}>
+        <span>⏳ &#9; {timeRemaining} sec.</span>
+      </div>
     </>
   );
 }

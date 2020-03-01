@@ -54,13 +54,30 @@ GAME PAGE STYLES
   min-height: 100vh;
   padding: 4vh 0px;
 
+  h1 {
+    margin: 0;
+    font-family: $luckiest-guy;
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
   // timer and score section styles
   .timer-score-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     border: 1px solid red;
     width: 90%;
     padding: 0px 10px;
+
+    .score,
+    .timer {
+      display: inline-block;
+      border: 1px dotted darkblue;
+      min-width: 15vw;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      padding: 8px;
+    }
   }
 
   // Boggle Board Styles

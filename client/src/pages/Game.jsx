@@ -6,7 +6,7 @@ import * as routes from "../constants/routeConstants";
 import httpService from "../services/httpService";
 import "../styles/boggle.scss";
 import { IconButton } from "@material-ui/core";
-import { CheckCircle, Cancel } from "@material-ui/icons";
+import { CheckCircle, Cancel, EmojiEvents } from "@material-ui/icons";
 import Toast from "../components/Toast";
 
 import {
@@ -181,10 +181,15 @@ export default function Game() {
           <p>is fetching data...</p>
         ) : (
           <React.Fragment>
+            <h1>BOGGLE</h1>
             <div className="timer-score-wrapper">
-              <Timer totalTimeInSec={state.totalTimeInSec} />
+              <Timer
+                totalTimeInSec={state.totalTimeInSec}
+                wrapperCssClass="timer"
+              />
               <div className="score">
-                <h2>score: {state.score}</h2>
+                <span>🏆 &#9; {state.score}</span>
+                {/* <EmojiEvents /> */}
               </div>
             </div>
             {/* Board */}

@@ -71,16 +71,34 @@ GAME PAGE STYLES
   padding: 4vh 0px;
 }
 
+.game-wrapper h1 {
+  margin: 0;
+  font-family: "Luckiest Guy";
+  font-size: 2rem;
+  letter-spacing: 4px;
+}
+
 .game-wrapper .timer-score-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border: 1px solid red;
   width: 90%;
   padding: 0px 10px;
+}
+
+.game-wrapper .timer-score-wrapper .score,
+.game-wrapper .timer-score-wrapper .timer {
+  display: inline-block;
+  border: 1px dotted darkblue;
+  min-width: 15vw;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px;
 }
 
 .game-wrapper .boggle-board-wrapper {
