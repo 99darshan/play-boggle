@@ -9,18 +9,17 @@ import "../styles/boggle.scss";
 export default function Home() {
   return (
     <>
+      <div className="fx-btn-gh">
+        <IconButton
+          aria-label="Github"
+          onClick={() => {
+            window.open("https://github.com/99darshan/play-boggle", "_blank");
+          }}
+        >
+          <GitHubIcon fontSize="large" color="disabled" />
+        </IconButton>
+      </div>
       <div className="home-wrapper">
-        <div className="github-button">
-          <IconButton
-            aria-label="Github"
-            onClick={() => {
-              window.open("https://github.com/99darshan/play-boggle", "_blank");
-            }}
-          >
-            <GitHubIcon fontSize="large" color="info" />
-          </IconButton>
-        </div>
-
         <h1>BOGGLE</h1>
 
         <Link to={GAME} style={{ textDecoration: "inherit", color: "inherit" }}>

@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import Timer from "../components/Timer";
 import { BoggleContext } from "../state/boggleContext";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
 import httpService from "../services/httpService";
 import "../styles/boggle.scss";
-import { IconButton } from "@material-ui/core";
-import { CheckCircle, Cancel, EmojiEvents } from "@material-ui/icons";
+import { IconButton, Fab } from "@material-ui/core";
+import { CheckCircle, Cancel, Home } from "@material-ui/icons";
 import Toast from "../components/Toast";
 import Loader from "../components/Loader";
 
@@ -28,6 +28,7 @@ export default function Game() {
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("info");
   let { state, dispatch } = useContext(BoggleContext);
+  const history = useHistory();
 
   // fetch random boggle board and its solution on game page load
   useEffect(() => {
@@ -175,7 +176,6 @@ export default function Game() {
       updateToastState(true, `Invalid Adjacent Letter !! 🤦‍♀️ 😩 🤯`, "info");
     }
   }
-
   return (
     <>
       <div className="game-wrapper">
@@ -184,6 +184,18 @@ export default function Game() {
           <Loader cssClass="loader" />
         ) : (
           <React.Fragment>
+            <div className="fixed-button">
+              <Fab
+                aria-label="Home"
+                onClick={() => {
+                  history.push(routes.HOME);
+                }}
+                size="small"
+                color="secondary"
+              >
+                <Home />
+              </Fab>
+            </div>
             <h1>BOGGLE</h1>
             <div className="timer-score-wrapper">
               <Timer

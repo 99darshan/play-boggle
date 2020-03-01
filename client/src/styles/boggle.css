@@ -34,6 +34,30 @@
   }
 }
 
+.fixed-button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: rotateIn;
+          animation-name: rotateIn;
+}
+
+.fx-btn-gh {
+  position: fixed;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: rotateIn;
+          animation-name: rotateIn;
+  top: 10px;
+  left: 10px;
+}
+
 /**
 HOME PAGE STYLES
 **/
@@ -53,18 +77,6 @@ HOME PAGE STYLES
           align-items: center;
   min-height: 100vh;
   padding: 4vh 0px;
-}
-
-.home-wrapper .github-button {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-name: rotateIn;
-          animation-name: rotateIn;
 }
 
 .home-wrapper h1 {
