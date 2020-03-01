@@ -1,5 +1,5 @@
 import React from "react";
-import Snackbar from "@material-ui/core/Snackbar";
+import { Snackbar, SnackbarContent } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 export default function Toast({ open, message, type, onClose }) {
@@ -7,11 +7,17 @@ export default function Toast({ open, message, type, onClose }) {
     <>
       <Snackbar
         open={open}
-        message={message}
-        autoHideDuration={1000}
+        autoHideDuration={2500}
         onClose={onClose}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      />
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: type === "success" ? "teal" : "orange"
+          }}
+          message={<span>{message}</span>}
+        />
+      </Snackbar>
     </>
   );
 }

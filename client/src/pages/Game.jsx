@@ -54,9 +54,17 @@ export default function Game() {
     // TODO: display toast messages on same correct and word input multiple times
     // TODO: on selection by click display toast when non-adjcent words are selected
     // TODO: based on API fetched vaid string, do check insensative comparison
-    if (!inputWord) updateToastState(true, `Invalid or Empty Input !!`, "info");
+    if (!inputWord)
+      updateToastState(true, `Oops, Empty Input !! 🤦‍♀️ 😩 🤯`, "info");
 
     let isValidBoggleWord = state.validWords.includes(inputWord);
+
+    if (
+      state.correctWords.includes(inputWord) ||
+      state.incorrectWords.includes(inputWord)
+    ) {
+      updateToastState(true, `${inputWord} is already submitted !! 🤦‍♀️ 😩 🤯`);
+    }
 
     if (isValidBoggleWord && !state.correctWords.includes(inputWord)) {
       dispatch({
@@ -67,14 +75,22 @@ export default function Game() {
         type: UPDATE_SCORE,
         payload: { score: state.score + inputWord.length }
       });
-      updateToastState(true, `Yay!! ${inputWord} is CORRECT`, "success");
+      updateToastState(
+        true,
+        `Yay, ${inputWord} is correct !! 🦄 🎉 🔥 🥳`,
+        "success"
+      );
     }
     if (!isValidBoggleWord && !state.incorrectWords.includes(inputWord)) {
       dispatch({
         type: ADD_INCORRECT_WORDS,
         payload: { incorrectWords: [...state.incorrectWords, inputWord] }
       });
-      updateToastState(true, `ERR!! ${inputWord} is WRONG`, "error");
+      updateToastState(
+        true,
+        `Oops, ${inputWord} is wrong !! 🤦‍♀️ 😩 🤯 `,
+        "error"
+      );
     }
     setInputWord("");
     setValidAdjacentcells([]);
