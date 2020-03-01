@@ -24,7 +24,7 @@ export default function Home() {
         <h1>BOGGLE</h1>
 
         <Link to={GAME} style={{ textDecoration: "inherit", color: "inherit" }}>
-          <PlayButton label="Play" />
+          <PlayButton label="Play" cssClass="play-button" />
         </Link>
 
         <div className="desc-wrapper">

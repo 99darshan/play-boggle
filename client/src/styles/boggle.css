@@ -278,9 +278,91 @@ GAME PAGE STYLES
 }
 
 /**
+Game End page styles
+**/
+.game-end-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100vh;
+  padding: 4vh 0px;
+}
+
+.game-end-wrapper h1 {
+  margin: 0;
+  font-family: "Luckiest Guy";
+  font-size: 2rem;
+  letter-spacing: 4px;
+}
+
+.game-end-wrapper .prev-game-info-wrapper {
+  margin-top: 16px;
+  width: 90vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Luckiest Guy";
+  text-align: center;
+}
+
+@media all and (min-width: 600px) {
+  .game-end-wrapper .prev-game-info-wrapper {
+    width: 50vw;
+  }
+}
+
+.game-end-wrapper .prev-game-info-wrapper h2 {
+  margin: 0px;
+  font-size: 2.2rem;
+}
+
+.game-end-wrapper .prev-game-info-wrapper p {
+  margin: 12px 0 6px 0;
+}
+
+.game-end-wrapper .prev-game-info-wrapper .word-lists {
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 16px;
+}
+
+.game-end-wrapper .prev-game-info-wrapper .word-lists p {
+  margin: 4px;
+}
+
+.game-end-wrapper .found-word {
+  color: #333;
+}
+
+.game-end-wrapper .word-not-found {
+  color: grey;
+}
+
+/**
 play button
 **/
-.button-wrapper {
+.play-button {
   border: 2px solid #333;
   border-radius: 25px;
   text-align: center;
@@ -303,25 +385,25 @@ play button
   cursor: pointer;
 }
 
-.button-wrapper:hover {
+.play-button:hover {
   background: #333;
   color: #efef;
 }
 
 @media all and (min-width: 600px) {
-  .button-wrapper {
+  .play-button {
     width: 30vw;
   }
 }
 
 @media all and (min-width: 768px) {
-  .button-wrapper {
+  .play-button {
     width: 20vw;
   }
 }
 
 @media all and (min-width: 992px) {
-  .button-wrapper {
+  .play-button {
     width: 15vw;
   }
 }

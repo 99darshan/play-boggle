@@ -1,10 +1,9 @@
 import React from "react";
-import "../styles/boggle.scss";
 
-export default function PlayButton({ label, onClick }) {
+export default function PlayButton({ label, handleClick, cssClass }) {
   return (
     <>
-      <div className="button-wrapper" onClick={onClick}>
+      <div className={cssClass} onClick={handleClick}>
         {label}
       </div>
     </>
