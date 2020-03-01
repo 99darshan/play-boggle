@@ -13,7 +13,7 @@ class BoggleController < ApplicationController
         boggle.solve_board()
         # TODO: get disticnt words from the list of found words
         puts boggle.boggle_words.length
-        boggle.boggle_words.each do |bw|
+        boggle.boggle_words.uniq.each do |bw|
             puts(bw)
         end
 
