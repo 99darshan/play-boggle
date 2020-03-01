@@ -13,12 +13,9 @@ class BoggleController < ApplicationController
         boggle.solve_board()
         # TODO: get disticnt words from the list of found words
         puts boggle.boggle_words.length
-        boggle.boggle_words.uniq.each do |bw|
-            puts(bw)
-        end
-
-
-
+        # boggle.boggle_words.uniq.each do |bw|
+        #     puts(bw)
+        # end
         # Quick Verification of Trie Implementation
         # dict_words = ["apple", "banana","grapes"]
         #test_words = ["apple", "banana","aalu", "mula","hawa","what","mui","muist"]
@@ -31,6 +28,6 @@ class BoggleController < ApplicationController
         #    puts(hash)
         #end
         # TODO: exception handling
-        render json:{board:boggle.board, words:boggle.boggle_words}
+        render json:{board:boggle.board, words:boggle.boggle_words.uniq}
     end
 end
