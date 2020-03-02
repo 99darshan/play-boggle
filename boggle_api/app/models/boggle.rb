@@ -1,6 +1,8 @@
 class Boggle
     attr_accessor :rows, :columns, :board, :boggle_words, :trie 
 
+    # Creates a Boggle Object
+    # generates the random boggle board using the input size and assigns to the property board
     def initialize(r, c, trie)
         @rows = r
         @columns = c 
@@ -18,6 +20,7 @@ class Boggle
         puts('board: '+ @board.to_s)
     end
 
+    # loops through each particular cell of the Board and calls fucntion to pefrom DFS on each cell
     def solve_board()
         for i in 0...@rows do
             for j in 0...@columns do 
@@ -26,6 +29,7 @@ class Boggle
         end 
     end
 
+    # Recursive DFS algorithm to traverse through all valid paths from a given cell and find the valid words by searching the trie data structure which is passed in during boggle object creation
     def dfs_boggle_board_cell(row_index, col_index, current_building_word, used_cells)
         word_or_prefix_hash = @trie.is_valid_word_or_prefix(current_building_word) 
         #puts word_or_prefix_hash
@@ -47,11 +51,19 @@ class Boggle
                 #puts updated_current_building_word
                 used_cells.push([new_row_index, new_col_index])
                 dfs_boggle_board_cell(new_row_index, new_col_index, updated_current_building_word, used_cells)
+                # remove the cell from used so that it could be reached from another path
+                # eg.[a,b,c,
+                #     d,e,f,
+                #    g,h,i] 
+                #    traversing from a to b to d, usedCell will hold the location of d, if there are no valid paths from d, remove it from 
+                # the usedCell, so it could be reached from another path e.g. e to b to e to d
                 used_cells.delete([new_row_index,new_col_index])
             end
         end
     end
 
+    # get valid neighbor row and column index for a given row and column index
+    # (0,0) is a set as initial reference points and sets all possible neighbors in eight directions
     def get_valid_neighbours(row_index, col_index)
         # possible coordinate of neighbors relative to (0,0) starting point
         all_neighbors = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]
