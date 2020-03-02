@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TrieTest < ActiveSupport::TestCase
-    test "trie_contains_a_valid_word" do
+    test "trie_contains_a_valid_word_and_prefix" do
         trie = Trie.new
         words_to_insert_in_trie = ["ball","baller","nest","nestle","super","superman"]
         words_not_in_trie =["potato","fries","momo","pizza","tea"]
