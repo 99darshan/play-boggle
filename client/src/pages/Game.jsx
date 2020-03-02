@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Timer from "../components/Timer";
+import Error from "../components/Error";
 import { BoggleContext } from "../state/boggleContext";
 import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
@@ -176,6 +177,8 @@ export default function Game() {
       updateToastState(true, `Invalid Adjacent Letter !! 🤦‍♀️ 😩 🤯`, "info");
     }
   }
+  console.log(state.hasError);
+  console.log(state.error);
   return (
     <>
       <div className="game-wrapper">
@@ -197,74 +200,81 @@ export default function Game() {
               </Fab>
             </div>
             <h1>BOGGLE</h1>
-            <div className="timer-score-wrapper">
-              <Timer
-                totalTimeInSec={state.totalTimeInSec}
-                wrapperCssClass="timer"
-              />
-              <div className="score">
-                <span>🏆 &#9; {state.score}</span>
-                {/* <EmojiEvents /> */}
+            {state.hasError && <Error message="Oopsy Daisy! Unknow Error..." />}
+            {!state.hasError && (
+              <div className="timer-score-wrapper">
+                <Timer
+                  totalTimeInSec={state.totalTimeInSec}
+                  wrapperCssClass="timer"
+                />
+                <div className="score">
+                  <span>🏆 &#9; {state.score}</span>
+                  {/* <EmojiEvents /> */}
+                </div>
               </div>
-            </div>
+            )}
             {/* Board */}
-            <div className="boggle-board-wrapper">
-              <div className="boggle-board">
-                {state.boggleBoard.map((row, rowInd) => {
-                  return (
-                    <div className="board-row">
-                      {row.map((item, colInd) => (
-                        <div
-                          className={`board-cell ${
-                            usedCellsByCurrentWord.some(
-                              c => rowInd === c[0] && colInd === c[1]
-                            )
-                              ? "board-cell-used"
-                              : ""
-                          }`}
-                          onClick={e => onBoggleCellClick(e, rowInd, colInd)}
-                        >
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })}
+            {!state.hasError && (
+              <div className="boggle-board-wrapper">
+                <div className="boggle-board">
+                  {state.boggleBoard.map((row, rowInd) => {
+                    return (
+                      <div className="board-row">
+                        {row.map((item, colInd) => (
+                          <div
+                            className={`board-cell ${
+                              usedCellsByCurrentWord.some(
+                                c => rowInd === c[0] && colInd === c[1]
+                              )
+                                ? "board-cell-used"
+                                : ""
+                            }`}
+                            onClick={e => onBoggleCellClick(e, rowInd, colInd)}
+                          >
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div className="user-input-wrapper">
-              <div className="user-input">
-                {!inputWord ? <p> 🔤 🖱️👆</p> : <p>{inputWord}</p>}
-              </div>
+            )}
+            {!state.hasError && (
+              <div className="user-input-wrapper">
+                <div className="user-input">
+                  {!inputWord ? <p> 🔤 🖱️👆</p> : <p>{inputWord}</p>}
+                </div>
 
-              <div className="user-actions">
-                <Fab
-                  className="fab-submit"
-                  aria-label="Submit"
-                  onClick={onWordSubmitted}
-                  variant="extended"
-                  size="medium"
-                >
-                  <CheckCircle />
-                  {"  " + "Submit"}
-                </Fab>
+                <div className="user-actions">
+                  <Fab
+                    className="fab-submit"
+                    aria-label="Submit"
+                    onClick={onWordSubmitted}
+                    variant="extended"
+                    size="medium"
+                  >
+                    <CheckCircle />
+                    {"  " + "Submit"}
+                  </Fab>
 
-                <Fab
-                  className="fab-reset"
-                  aria-label="Reset"
-                  onClick={e => {
-                    setInputWord("");
-                    setValidAdjacentcells([]);
-                    setUsedCellsByCurrentWord([]);
-                  }}
-                  size="medium"
-                  variant="extended"
-                >
-                  <Cancel />
-                  {"  " + "Cancel"}
-                </Fab>
+                  <Fab
+                    className="fab-reset"
+                    aria-label="Reset"
+                    onClick={e => {
+                      setInputWord("");
+                      setValidAdjacentcells([]);
+                      setUsedCellsByCurrentWord([]);
+                    }}
+                    size="medium"
+                    variant="extended"
+                  >
+                    <Cancel />
+                    {"  " + "Cancel"}
+                  </Fab>
+                </div>
               </div>
-            </div>
+            )}
             <Toast
               open={shouldOpenToast}
               message={toastMessage}
