@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { BoggleContext } from "../state/boggleContext";
 import { END_GAME } from "../state/boggleActionTypes";
 export default function Timer({ totalTimeInSec, wrapperCssClass }) {
-  let { state, dispatch } = useContext(BoggleContext);
+  let { dispatch } = useContext(BoggleContext);
   const [timeRemaining, setTimeRemaining] = useState(totalTimeInSec);
   useEffect(() => {
     //console.log(timeRemaining);
@@ -23,7 +23,12 @@ export default function Timer({ totalTimeInSec, wrapperCssClass }) {
   return (
     <>
       <div className={wrapperCssClass}>
-        <span>⏳ &#9; {timeRemaining} sec.</span>
+        <span>
+          <span role="img" aria-label="timer">
+            ⏳
+          </span>
+          &#9; {timeRemaining} sec.
+        </span>
       </div>
     </>
   );

@@ -6,7 +6,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routeConstants";
 import httpService from "../services/httpService";
 import "../styles/boggle.scss";
-import { IconButton, Fab } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 import { CheckCircle, Cancel, Home } from "@material-ui/icons";
 import Toast from "../components/Toast";
 import Loader from "../components/Loader";
@@ -49,7 +49,7 @@ export default function Game() {
   }
 
   const onWordSubmitted = () => {
-    console.log("submitted word " + inputWord);
+    //console.log("submitted word " + inputWord);
 
     // reset cells used by current word
     setUsedCellsByCurrentWord([]);
@@ -102,18 +102,18 @@ export default function Game() {
   };
 
   function onBoggleCellClick(e, currentRow, currentCol) {
-    console.log(
-      "r: " +
-        currentRow +
-        "& col: " +
-        currentCol +
-        "-" +
-        typeof currentRow +
-        typeof currentCol
-    );
+    // console.log(
+    //   "r: " +
+    //     currentRow +
+    //     "& col: " +
+    //     currentCol +
+    //     "-" +
+    //     typeof currentRow +
+    //     typeof currentCol
+    // );
     // if any toast is yet to auto disapper, hide them if user clicks on a cell for new input
     setShouldOpenToast(false);
-    console.table(usedCellsByCurrentWord);
+    //console.table(usedCellsByCurrentWord);
 
     let isCurrentCellAlreadySelected = usedCellsByCurrentWord.some(
       c => currentRow === c[0] && currentCol === c[1]
@@ -124,7 +124,7 @@ export default function Game() {
       return;
     }
 
-    console.log("cell clikced: " + e.target.textContent);
+    //console.log("cell clikced: " + e.target.textContent);
     //console.table(validAdjacentCells);
     //setInputWord(inputWord + e.target.textContent);
     let isCurrentRowColPresentInValidAdjCells = validAdjacentCells.some(cor => {
@@ -136,7 +136,7 @@ export default function Game() {
       validAdjacentCells.length === 0 ||
       isCurrentRowColPresentInValidAdjCells
     ) {
-      console.log("valid index");
+      //console.log("valid index");
       setInputWord(inputWord + e.target.textContent);
       let possibleAdjCellIndices = [
         [-1, -1],
@@ -173,12 +173,12 @@ export default function Game() {
       validAdjacentCells.length > 0 &&
       !isCurrentRowColPresentInValidAdjCells
     ) {
-      console.log("invalid adjacent cell");
+      //console.log("invalid adjacent cell");
       updateToastState(true, `Invalid Adjacent Letter !! 🤦‍♀️ 😩 🤯`, "info");
     }
   }
-  console.log(state.hasError);
-  console.log(state.error);
+  //console.log(state.hasError);
+  //console.log(state.error);
   return (
     <>
       <div className="game-wrapper">
@@ -208,7 +208,10 @@ export default function Game() {
                   wrapperCssClass="timer"
                 />
                 <div className="score">
-                  <span>🏆 &#9; {state.score}</span>
+                  <span role="img" aria-label="score">
+                    🏆
+                  </span>
+                  <span>&#9; {state.score}</span>
                   {/* <EmojiEvents /> */}
                 </div>
               </div>
@@ -243,7 +246,22 @@ export default function Game() {
             {!state.hasError && (
               <div className="user-input-wrapper">
                 <div className="user-input">
-                  {!inputWord ? <p> 🔤 🖱️👆</p> : <p>{inputWord}</p>}
+                  {!inputWord ? (
+                    <p>
+                      {" "}
+                      <span role="img" aria-label="input">
+                        🔤
+                      </span>
+                      <span role="img" aria-label="computer-mouse">
+                        🖱️
+                      </span>
+                      <span role="img" aria-label="up-hand">
+                        👆
+                      </span>
+                    </p>
+                  ) : (
+                    <p>{inputWord}</p>
+                  )}
                 </div>
 
                 <div className="user-actions">
@@ -255,7 +273,7 @@ export default function Game() {
                     size="medium"
                   >
                     <CheckCircle />
-                    {"  " + "Submit"}
+                    Submit
                   </Fab>
 
                   <Fab
@@ -270,7 +288,7 @@ export default function Game() {
                     variant="extended"
                   >
                     <Cancel />
-                    {"  " + "Cancel"}
+                    Cancel
                   </Fab>
                 </div>
               </div>

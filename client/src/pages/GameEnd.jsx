@@ -12,7 +12,7 @@ import { Fab } from "@material-ui/core";
 function GameEnd() {
   let { state, dispatch } = useContext(BoggleContext);
   const history = useHistory();
-  console.log(state.hasGameEnded);
+  //(state.hasGameEnded);
   return (
     <>
       <div className="fixed-button">
@@ -43,7 +43,12 @@ function GameEnd() {
         {/* Only dispaly previous game info on game end, hide on manual navigation to the route */}
         {state.hasGameEnded && (
           <div className="prev-game-info-wrapper">
-            <h2>🏆 &#9; &#9; {state.score}</h2>
+            <h2>
+              <span role="img" aria-label="score">
+                🏆{" "}
+              </span>
+              &#9; &#9; {state.score}
+            </h2>
             <div>
               <p>
                 You Found {state.correctWords.length} words out of possible{" "}

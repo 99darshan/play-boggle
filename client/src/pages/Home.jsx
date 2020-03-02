@@ -9,7 +9,7 @@ import { START_GAME } from "../state/boggleActionTypes";
 import "../styles/boggle.scss";
 import { BoggleContext } from "../state/boggleContext";
 export default function Home() {
-  let { state, dispatch } = useContext(BoggleContext);
+  let { dispatch } = useContext(BoggleContext);
   return (
     <>
       <div className="fx-btn-gh">
@@ -49,7 +49,18 @@ export default function Home() {
             <Divider />
             <br />
             <span>
-              Made with 💜 ☕ !💤 by{" "}
+              Made with{" "}
+              <span role="img" aria-label="heart">
+                💜{" "}
+              </span>
+              <span role="img" aria-label="coffee">
+                ☕{" "}
+              </span>
+              !
+              <span role="img" aria-label="no-sleep">
+                💤
+              </span>{" "}
+              by{" "}
               <a href="https://www.linkedin.com/in/99darshan/" target="_blank">
                 @99darshan
               </a>
