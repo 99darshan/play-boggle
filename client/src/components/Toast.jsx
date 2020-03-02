@@ -3,6 +3,11 @@ import { Snackbar, SnackbarContent } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 export default function Toast({ open, message, type, onClose }) {
+  const toastBgColors = {
+    error: "#ef5350",
+    success: "#009688",
+    info: "#757575"
+  };
   return (
     <>
       <Snackbar
@@ -13,7 +18,9 @@ export default function Toast({ open, message, type, onClose }) {
       >
         <SnackbarContent
           style={{
-            backgroundColor: type === "success" ? "teal" : "orange"
+            fontFamily: "Merienda One",
+            backgroundColor:
+              type === "success" ? toastBgColors.success : toastBgColors.error
           }}
           message={<span>{message}</span>}
         />
