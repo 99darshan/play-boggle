@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { GAME } from "../constants/routeConstants";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import { IconButton } from "@material-ui/core";
 import PlayButton from "../components/PlayButton";
 import Divider from "@material-ui/core/Divider";
+import { START_GAME } from "../state/boggleActionTypes";
 import "../styles/boggle.scss";
+import { BoggleContext } from "../state/boggleContext";
 export default function Home() {
+  let { state, dispatch } = useContext(BoggleContext);
   return (
     <>
       <div className="fx-btn-gh">
@@ -24,7 +27,11 @@ export default function Home() {
         <h1>BOGGLE</h1>
 
         <Link to={GAME} style={{ textDecoration: "inherit", color: "inherit" }}>
-          <PlayButton label="Play" cssClass="play-button" />
+          <PlayButton
+            label="Play"
+            cssClass="play-button"
+            handleClick={() => dispatch({ type: START_GAME })}
+          />
         </Link>
 
         <div className="desc-wrapper">

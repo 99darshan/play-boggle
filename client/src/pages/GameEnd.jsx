@@ -17,12 +17,12 @@ function GameEnd() {
     <>
       <div className="fixed-button">
         <Fab
+          className="fixed-btn-fab"
           aria-label="Home"
           onClick={() => {
             history.push(routes.HOME);
           }}
           size="small"
-          color="secondary"
         >
           <HomeIcon />
         </Fab>

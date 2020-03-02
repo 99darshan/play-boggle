@@ -178,6 +178,7 @@ GAME PAGE STYLES
       font-family: $luckiest-guy;
       font-size: 8vw;
       color: $primary;
+      cursor: pointer;
       //background-color: rebeccapurple;
       @media all and (min-width: $small) {
         width: 15vw;
@@ -254,13 +255,15 @@ Game End page styles
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  padding: 4vh 0px;
+  //padding: 4vh 0px;
   h1 {
     margin: 0;
     font-family: $luckiest-guy;
     font-size: 2rem;
     letter-spacing: 4px;
+    color: $primary;
   }
 
   .prev-game-info-wrapper {
@@ -272,6 +275,7 @@ Game End page styles
     flex-direction: column;
     font-family: $luckiest-guy;
     text-align: center;
+    color: $primary;
 
     @media all and (min-width: $small) {
       width: 50vw;
@@ -299,10 +303,10 @@ Game End page styles
   }
 
   .found-word {
-    color: #333;
+    color: $primary;
   }
   .word-not-found {
-    color: grey;
+    color: $secondary;
   }
 }
 
