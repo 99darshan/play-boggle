@@ -11,12 +11,13 @@ export default function Home() {
     <>
       <div className="fx-btn-gh">
         <IconButton
+          color="inherit"
           aria-label="Github"
           onClick={() => {
             window.open("https://github.com/99darshan/play-boggle", "_blank");
           }}
         >
-          <GitHubIcon fontSize="large" color="disabled" />
+          <GitHubIcon fontSize="large" />
         </IconButton>
       </div>
       <div className="home-wrapper">
@@ -39,7 +40,7 @@ export default function Home() {
 
           <div className="footer">
             <Divider />
-
+            <br />
             <span>
               Made with 💜 ☕ !💤 by{" "}
               <a href="https://www.linkedin.com/in/99darshan/" target="_blank">

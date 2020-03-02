@@ -7,6 +7,13 @@ $extra-large: 1200px;
 /** FONTS **/
 $luckiest-guy: "Luckiest Guy";
 
+/**COLORS**/
+$primary: #393f4d;
+$primary-dark: #2a2a2a;
+$primary-light: whitesmoke;
+$secondary: #7e7e7e;
+$secondary-light: #d4d4dc;
+
 /** custom animation **/
 @keyframes rotateIn {
   from {
@@ -29,6 +36,15 @@ $luckiest-guy: "Luckiest Guy";
   animation-duration: 2s;
   animation-fill-mode: both;
   animation-name: rotateIn;
+  color: $primary-light;
+  .fixed-btn-fab {
+    background-color: $primary;
+    color: $primary-light;
+    &:hover {
+      background-color: $primary;
+      color: $primary-light;
+    }
+  }
 }
 
 .fx-btn-gh {
@@ -38,6 +54,7 @@ $luckiest-guy: "Luckiest Guy";
   animation-name: rotateIn;
   top: 10px;
   left: 10px;
+  color: $primary;
 }
 
 /**
@@ -56,6 +73,7 @@ HOME PAGE STYLES
     font-family: $luckiest-guy;
     font-size: 12vw;
     letter-spacing: 4px;
+    color: $primary;
   }
 
   .desc-wrapper {
@@ -67,15 +85,22 @@ HOME PAGE STYLES
     .about {
       //border: 1px solid green;
       padding: 12px;
+      h4 {
+        color: $primary;
+      }
+      p {
+        color: $secondary;
+      }
     }
 
     .footer {
       text-align: center;
-      margin-top: 24px;
+      //margin-top: 12px;
       font-size: 12px;
+      color: $secondary;
       a {
         text-decoration: none;
-        color: inherit;
+        color: $primary;
         font-weight: bold;
       }
     }
@@ -101,6 +126,7 @@ GAME PAGE STYLES
     font-family: $luckiest-guy;
     font-size: 2rem;
     letter-spacing: 4px;
+    color: $primary;
   }
   // timer and score section styles
   .timer-score-wrapper {
@@ -119,6 +145,7 @@ GAME PAGE STYLES
       font-weight: bold;
       text-align: center;
       padding: 8px;
+      color: $primary;
     }
   }
 
@@ -142,7 +169,7 @@ GAME PAGE STYLES
       height: 20vw;
       width: 20vw;
       text-align: center;
-      border: 1px solid lavender;
+      border: 1px solid $secondary-light;
       padding: 4px;
       //centers the character of cell
       display: flex;
@@ -150,7 +177,7 @@ GAME PAGE STYLES
       justify-content: center;
       font-family: $luckiest-guy;
       font-size: 8vw;
-      color: #424242;
+      color: $primary;
       //background-color: rebeccapurple;
       @media all and (min-width: $small) {
         width: 15vw;
@@ -169,7 +196,8 @@ GAME PAGE STYLES
       }
     }
     .board-cell-used {
-      background-color: #212121;
+      background-color: $primary;
+      color: $primary-light;
     }
   }
 
@@ -197,10 +225,23 @@ GAME PAGE STYLES
       //border: 1px solid blue;
       justify-content: center;
       align-items: center;
-      font-weight: bold;
-      font-size: 50px;
+      margin-top: 8px;
       IconButton {
         cursor: pointer;
+      }
+
+      .fab-submit {
+        background-color: $primary;
+        color: $primary-light;
+        text-transform: capitalize;
+        margin-right: 4px;
+      }
+      .fab-reset {
+        margin-left: 4px;
+        background-color: transparent;
+        border: 1px solid $primary;
+        text-transform: capitalize;
+        color: $primary;
       }
     }
   }
@@ -269,7 +310,7 @@ Game End page styles
 play button component
 **/
 .play-button {
-  border: 2px solid #333;
+  border: 2px solid $primary;
   border-radius: 25px;
   text-align: center;
   display: flex;
@@ -282,9 +323,10 @@ play button component
   margin-top: 12px;
   transition: all 0.5s ease-in-out;
   cursor: pointer;
+  color: $primary;
   &:hover {
-    background: #333;
-    color: #efef;
+    background: $primary;
+    color: $primary-light;
   }
   @media all and (min-width: $small) {
     width: 30vw;

@@ -186,12 +186,12 @@ export default function Game() {
           <React.Fragment>
             <div className="fixed-button">
               <Fab
+                className="fixed-btn-fab"
                 aria-label="Home"
                 onClick={() => {
                   history.push(routes.HOME);
                 }}
                 size="small"
-                color="secondary"
               >
                 <Home />
               </Fab>
@@ -238,20 +238,31 @@ export default function Game() {
               </div>
 
               <div className="user-actions">
-                <IconButton aria-label="Submit" onClick={onWordSubmitted}>
-                  <CheckCircle fontSize="large" color="primary" />
-                </IconButton>
+                <Fab
+                  className="fab-submit"
+                  aria-label="Submit"
+                  onClick={onWordSubmitted}
+                  variant="extended"
+                  size="medium"
+                >
+                  <CheckCircle />
+                  {"  " + "Submit"}
+                </Fab>
 
-                <IconButton
+                <Fab
+                  className="fab-reset"
                   aria-label="Reset"
                   onClick={e => {
                     setInputWord("");
                     setValidAdjacentcells([]);
                     setUsedCellsByCurrentWord([]);
                   }}
+                  size="medium"
+                  variant="extended"
                 >
-                  <Cancel fontSize="large" color="error" />
-                </IconButton>
+                  <Cancel />
+                  {"  " + "Cancel"}
+                </Fab>
               </div>
             </div>
             <Toast
