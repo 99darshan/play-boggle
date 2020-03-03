@@ -38,11 +38,21 @@ export default function Home() {
           <div className="about">
             <h4>About Game</h4>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
-              dolore inventore similique, corrupti temporibus nihil repellat,
-              esse asperiores minima explicabo magni tempore vel, mollitia
-              perferendis. Tenetur deleniti in modi vitae.
+              - Boggle is a word game invented by Allan Turoff and originally
+              distributed by Parker Brothers.
             </p>
+            <p>
+              - Discover as many words as possible from a 4*4 grid of randomly
+              selected letters.
+            </p>
+            <p>
+              - A valid word can only be formed if each letter is contiguous
+              (i.e. side-by-side, above or below, or on the diagonal) with the
+              next, and no letter position can be used more than once in any
+              given word.
+            </p>
+            <p>- A valid word should have at least 3 letters.</p>
+            <p>- Score += 1 * number of letters in the word.</p>
           </div>
 
           <div className="footer">
